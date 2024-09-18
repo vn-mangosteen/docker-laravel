@@ -4,16 +4,16 @@ services:
 
     app:
         build:
-            context: .
-            dockerfile: Dockerfile
+            context: ..
+            dockerfile: docker/Dockerfile
         container_name: laravel-app
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
-            - ./:/var/www
+            - ../:/var/www
         networks:
             - laravel
-            - database_default  # DB Network
+            - database_default
 
     nginx:
         image: nginx:alpine
@@ -22,7 +22,7 @@ services:
         ports:
             - "9000:80"
         volumes:
-            - ./:/var/www
+            - ../:/var/www
             - ./nginx:/etc/nginx/conf.d/
         networks:
             - laravel
@@ -32,5 +32,5 @@ services:
 networks:
     laravel:
         driver: bridge
-    database_default: # DB Network
+    database_default:
         external: true
