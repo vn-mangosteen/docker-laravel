@@ -1,41 +1,48 @@
 # Running Laravel with Docker on Local
 
-This guide will help you set up a Laravel application using Docker, with an existing database network.
+This guide outlines the process of setting up a Laravel application using Docker, utilizing an existing database network.
 
 ## Prerequisites
 
 - Docker and Docker Compose installed on your system
 - A Laravel application
+- An existing database network
 
 ## Setup Instructions
 
-1. Navigate to the root of your Laravel application.
+1. Navigate to the root directory of your Laravel application.
 
-2. Create a new folder named `docker`:
-
-   ```bash
-   mkdir docker
-   ```
-
-3. Clone this Docker configuration project into the `docker` folder:
-
+2. Clone the Docker configuration project:
    ```bash
    git clone [repository-url] docker
    ```
-
    Replace `[repository-url]` with the actual URL of the Docker configuration repository.
 
-4. Build and run the Docker containers:
-
+3. Build and run the Docker containers:
    ```bash
    cd docker
    docker-compose up --build
    ```
 
-This will set up your Laravel application with Docker, creating all necessary containers as defined in the `docker-compose.yml` file.
+## Configuration
 
-## Additional Information
+1. Ensure your Laravel `.env` file is configured to use the appropriate Docker service names for database connections.
 
-- The database network will be created automatically by Docker Compose.
-- Make sure your Laravel `.env` file is configured to use the appropriate Docker service names for database connections.
-- For any issues or additional configuration needs, refer to the Docker documentation or the specific instructions provided in the Docker configuration repository.
+2. Connect your containers to the existing database network in the `docker-compose.yml` file:
+   ```yaml
+   networks:
+     existing_db_network:
+       external: true
+   ```
+
+## Troubleshooting
+
+For issues or additional configuration needs, refer to:
+- The Docker documentation
+- Specific instructions in the Docker configuration repository
+
+## Additional Notes
+
+- This setup creates all necessary containers as defined in the `docker-compose.yml` file.
+- The existing database network should be specified in your Docker Compose configuration.
+- Customize the Docker configuration as needed for your specific Laravel application requirements.
