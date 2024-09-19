@@ -6,7 +6,7 @@ services:
         build:
             context: ..
             dockerfile: docker/Dockerfile
-        container_name: laravel-app
+        container_name: backend-core
         restart: unless-stopped
         working_dir: /var/www/
         volumes:
@@ -17,7 +17,7 @@ services:
 
     nginx:
         image: nginx:alpine
-        container_name: laravel-nginx
+        container_name: backend-core-nginx
         restart: unless-stopped
         ports:
             - "9000:80"
